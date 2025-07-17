@@ -1,5 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
+import Router from "./routes/aviones.routes.js"
+
 
 dotenv.config()
 
@@ -9,13 +11,12 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-app.use("/api", (req, res) => {
-    res.send("Bienvenidos!")
-})
+app.use("/", new Router().start())
+
 app.use((req, res) => {
     res.status(404).json({
         code: 404,
-        message: "Not found."
+        message: "Recurso no encontrado"
     })
 })
 
